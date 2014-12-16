@@ -99,33 +99,12 @@ def a3():
 		else:
 			print "Public exponent = {} -> Invalid".format(e)
 
-def a4():
-	# Aufgabe 4
-	print seperator
-	print "Aufgabe 4"
-	print seperator
-
-	msg = "lorem ipsum lore"
-	print "Message: {}".format(msg)
-	msg_as_byte_array = bytearray(msg)
-	pw_as_byte_array = bytearray(hashlib.sha256("root").digest()[:16])
-
-	encrypted_msg = encrypt_cbc(str(pw_as_byte_array), msg_as_byte_array)
-	print "Encrypted message (XTEA-CBC): {}".format(binascii.hexlify(encrypted_msg))
-	encrypted_msg_base64 = base64.b64encode(encrypted_msg)
-	print "Encrypted message (XTEA-CBC -> base64): {}".format(encrypted_msg_base64)
-
-	encrypted_msg_1 = base64.b64decode(encrypted_msg_base64)
-	print "Encrypted message (base64 -> XTEA-CBC): {}".format(binascii.hexlify(encrypted_msg_1))
-	decrypted_msg = decrypt_cbc(str(pw_as_byte_array), bytearray(encrypted_msg_1))
-	print "Decrypted message: {}".format(decrypted_msg)
-
 def main():
 	logging.basicConfig(level=logging.ERROR)
 	a1()
 	a2()
 	a3()
-	a4()
+	# a4 -> naiveDH.py
 
 if __name__ == "__main__":
 	main()
