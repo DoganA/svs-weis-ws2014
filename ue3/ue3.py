@@ -57,9 +57,20 @@ def a1():
 	print seperator
 	for a, b in rand_set:
 		print "a = {}, b = {}".format(a, b)
-		print "Public key A = {}".format(gen_dhke_key(g, a, p))
-		print "Public key B = {}".format(gen_dhke_key(g, b, p))
-		print "Shared key = {}".format(a, b, gen_dhke_key(g, a * b, p))
+		public_key_A = gen_dhke_key(g, a, p)
+		print "A = {}".format(public_key_A)
+		public_key_B = gen_dhke_key(g, b, p)
+		print "B = {}".format(public_key_B)
+		
+		shared_key_B = gen_dhke_key(public_key_A, b, p)
+		shared_key_A = gen_dhke_key(public_key_B, a, p)
+		shared_key = gen_dhke_key(g, a * b, p)
+		
+		assert(shared_key == shared_key_A == shared_key_B)
+		
+		print "Shared key K_B = {}".format(shared_key_B)
+		print "Shared key K_A = {}".format(shared_key_A)
+		print "Shared key K = {}".format(shared_key)
 
 def a2():
 	# Aufgabe 2
